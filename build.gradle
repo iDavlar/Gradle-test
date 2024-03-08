@@ -9,6 +9,10 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    javaVersion = 20
+}
+
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
@@ -17,3 +21,38 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+task compileJava1(group: "davlarTest")
+task processResources1(group: "davlarTest")
+task clean1(group: "davlarTest")
+
+task classes1(group: "davlarTest")
+classes1.dependsOn(compileJava1)
+classes1.dependsOn(processResources1)
+
+task javadoc1(group: "davlarTest")
+task compileTestJava1(group: "davlarTest")
+task processTestResources1(group: "davlarTest")
+task jar1(group: "davlarTest")
+javadoc1.dependsOn(classes1)
+compileTestJava1.dependsOn(classes1)
+jar1.dependsOn(classes1)
+
+task testClasses1(group: "davlarTest")
+task uploadArchives1(group: "davlarTest")
+task assemble1(group: "davlarTest")
+testClasses1.dependsOn(compileTestJava1)
+testClasses1.dependsOn(processTestResources1)
+uploadArchives1.dependsOn(jar1)
+assemble1.dependsOn(jar1)
+
+task test1(group: "davlarTest")
+test1.dependsOn(classes1)
+test1.dependsOn(testClasses1)
+
+task check1(group: "davlarTest")
+check1.dependsOn(test1)
+
+task build1(group: "davlarTest")
+build1.dependsOn(check1)
+build1.dependsOn(assemble1)

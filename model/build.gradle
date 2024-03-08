@@ -1,0 +1,15 @@
+plugins {
+
+}
+
+group = 'by.davlar'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}
+
